@@ -1,0 +1,32 @@
+  version: '3'
+  services: 
+    springboot-docker-container: 
+      image: springboot-docker-container
+      build: .
+      ports: 
+        - "8080:8080" 
+      restart: always
+      environment:
+         SPRING_DATASOURCE_URL: jdbc:mysql://mysql-standalone:3306/company?useSSL=false 
+         SPRING_DATASOURCE_USERNAME: "root"
+         SPRING_DATASOURCE_PASSWORD: "root"
+      build: 
+        context: "./"
+        dockerfile: "Dockerfile"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+      depends_on:
+        - mysql-standalone        
+        
+        
+    mysql-standalone:
+      image: mysql:5.6
+      restart: always
+      ports: 
+        - "3309:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_PASSWORD=root
+        - MYSQL_DATABASE=company 
+ #docker-compose -f docker-compose.yml up      
+      
+                    
+                
